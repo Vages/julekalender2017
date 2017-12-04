@@ -1,5 +1,4 @@
 from luke01.luke01 import get_character_count_of_word, CharCount, WordList
-
 from itertools import filterfalse
 
 
