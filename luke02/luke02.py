@@ -7,35 +7,24 @@ CoordinateList = typing.List[Coordinate]
 CoordinateSet = typing.Set[Coordinate]
 
 
-def the_mysterious_function(x: int, y: int) -> int:
-    return x ** 3 + 12 * x * y + 5 * x * y ** 2
-
-
-def int_to_binary(some_integer: int) -> str:
-    return "{0:b}".format(some_integer)
-
-
-def has_odd_number_of_ones(binary_number: str):
-    count = Counter(binary_number)
-    if count['1'] % 2 == 1:
-        return True
-    else:
-        return False
-
-
-def int_has_odd_number_of_ones(some_int: int) -> bool:
-    int_as_binary: str = int_to_binary(some_int)
-    return has_odd_number_of_ones(int_as_binary)
-
-
-def add(c1: Coordinate, c2: Coordinate) -> Coordinate:
-    return c1[0] + c2[0], c1[1] + c2[1]
-
-
 class Labyrinth:
     def __init__(self, size):
         self._structure: LabyrinthStructure = self.make_labyrinth_structure(size)
         self.size = size
+
+    @staticmethod
+    def make_labyrinth_structure(size: int) -> LabyrinthStructure:
+        the_board = []
+
+        for y in range(1, size + 1):
+            current_row = []
+            for x in range(1, size + 1):
+                current_number = the_mysterious_function(x, y)
+                current_row.append(int_has_odd_number_of_ones(current_number))
+
+            the_board.append(current_row)
+
+        return the_board
 
     def has_wall_at_cell(self, c: Coordinate) -> bool:
         x, y = c
@@ -60,20 +49,6 @@ class Labyrinth:
     def __str__(self):
         return '\n'.join([' '.join(["#" if cell else '_' for cell in row]) for row in self._structure])
 
-    @staticmethod
-    def make_labyrinth_structure(size: int) -> LabyrinthStructure:
-        the_board = []
-
-        for y in range(1, size + 1):
-            current_row = []
-            for x in range(1, size + 1):
-                current_number = the_mysterious_function(x, y)
-                current_row.append(int_has_odd_number_of_ones(current_number))
-
-            the_board.append(current_row)
-
-        return the_board
-
     def get_open_cells(self) -> CoordinateSet:
         open_cells: CoordinateSet = set()
 
@@ -83,6 +58,28 @@ class Labyrinth:
                     open_cells.add((x, y))
 
         return open_cells
+
+
+def the_mysterious_function(x: int, y: int) -> int:
+    return x ** 3 + 12 * x * y + 5 * x * y ** 2
+
+
+def has_odd_number_of_ones(binary_number: str) -> bool:
+    count: typing.Counter = Counter(binary_number)
+    return count['1'] % 2
+
+
+def int_has_odd_number_of_ones(some_int: int) -> bool:
+    int_as_binary: str = int_to_binary(some_int)
+    return has_odd_number_of_ones(int_as_binary)
+
+
+def int_to_binary(some_integer: int) -> str:
+    return "{0:b}".format(some_integer)
+
+
+def add(c1: Coordinate, c2: Coordinate) -> Coordinate:
+    return c1[0] + c2[0], c1[1] + c2[1]
 
 
 the_labyrinth = Labyrinth(1000)
@@ -95,11 +92,10 @@ while places_to_visit:
     if now_visiting in already_visited:
         continue
     already_visited.add(now_visiting)
-    open_neighbors = the_labyrinth.get_open_neighbors(now_visiting)
+    open_neighbors: CoordinateList = the_labyrinth.get_open_neighbors(now_visiting)
     for n in open_neighbors:
         if n not in already_visited:
             places_to_visit.append(n)
 
-
-unreachable_cells = the_labyrinth.get_open_cells() - already_visited
+unreachable_cells: CoordinateSet = the_labyrinth.get_open_cells() - already_visited
 print(len(unreachable_cells))
