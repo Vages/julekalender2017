@@ -1,7 +1,7 @@
 import typing
 
 
-def the_golden_sequence(n: int = 1) -> typing.List[int]:
+def golombs_sequence(n: int = 1) -> typing.List[int]:
     the_array: typing.List[int] = [0]
 
     for i in range(1, n + 1):
@@ -20,4 +20,4 @@ def the_golden_sequence(n: int = 1) -> typing.List[int]:
 
 
 if __name__ == "__main__":
-    print(sum(the_golden_sequence(10 ** 6)))
+    print(sum(golombs_sequence(10 ** 6)))
