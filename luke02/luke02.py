@@ -82,20 +82,21 @@ def add(c1: Coordinate, c2: Coordinate) -> Coordinate:
     return c1[0] + c2[0], c1[1] + c2[1]
 
 
-the_labyrinth = Labyrinth(1000)
+if __name__ == '__main__':
+    the_labyrinth = Labyrinth(1000)
 
-places_to_visit: typing.Deque[Coordinate] = deque([(0, 1)])
-already_visited: CoordinateSet = set()
+    places_to_visit: typing.Deque[Coordinate] = deque([(0, 1)])
+    already_visited: CoordinateSet = set()
 
-while places_to_visit:
-    now_visiting: Coordinate = places_to_visit.popleft()
-    if now_visiting in already_visited:
-        continue
-    already_visited.add(now_visiting)
-    open_neighbors: CoordinateList = the_labyrinth.get_open_neighbors(now_visiting)
-    for n in open_neighbors:
-        if n not in already_visited:
-            places_to_visit.append(n)
+    while places_to_visit:
+        now_visiting: Coordinate = places_to_visit.popleft()
+        if now_visiting in already_visited:
+            continue
+        already_visited.add(now_visiting)
+        open_neighbors: CoordinateList = the_labyrinth.get_open_neighbors(now_visiting)
+        for n in open_neighbors:
+            if n not in already_visited:
+                places_to_visit.append(n)
 
-unreachable_cells: CoordinateSet = the_labyrinth.get_open_cells() - already_visited
-print(len(unreachable_cells))
+    unreachable_cells: CoordinateSet = the_labyrinth.get_open_cells() - already_visited
+    print(len(unreachable_cells))
