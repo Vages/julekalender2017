@@ -1,0 +1,7 @@
+
+Finn det minste tallet N med følgende egenskaper:
+- Det siste sifferet i tallet er 6.
+- Hvis det siste 6 sifferet flyttes fra sist til helt først i tallet så er det resulterende tallet 4 ganger så stort som det originale tallet.  
+
+---
+Oppgaven er laget av [Alexander Bjerkan](https://twitter.com/alexanbj). Alexander jobber i Knowit som utvikler i et av våre team. 

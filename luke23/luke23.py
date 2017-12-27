@@ -2,7 +2,7 @@ from collections import defaultdict
 from enum import Enum, auto
 from typing import Set, FrozenSet, DefaultDict, List, Dict, Union
 
-DRAWS_BEFORE_HUMANS_CHANGE_PLACES = 4
+DRAWS_BEFORE_HUMANS_CHANGE_PLACES = 3
 
 
 class Player(Enum):
