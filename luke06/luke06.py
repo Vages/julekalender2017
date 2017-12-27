@@ -1,5 +1,5 @@
-from math import radians, cos, sin, asin, sqrt
 import typing
+from math import radians, cos, sin, asin, sqrt
 
 Coordinate = typing.Tuple[float, float]
 Place = typing.List[str]
@@ -10,8 +10,8 @@ def max_possible_unique_round_trips_in_given_time_span(time_span_in_hours: float
     hours_used: float = 0
     places_visited: int = 0
 
-    for d in sorted(distances_from_origin):
-        round_trip_time = 2 * hours_required_to_fly_distance_in_km_with_santas_sleigh(d)
+    for distance in sorted(distances_from_origin):
+        round_trip_time = 2 * hours_required_to_fly_distance_in_km_with_santas_sleigh(distance)
         hours_used_if_we_were_to_visit_this_place = hours_used + round_trip_time
         if hours_used_if_we_were_to_visit_this_place > time_span_in_hours:
             break
@@ -68,8 +68,7 @@ def get_distance_in_kilometers_from_two_decimal_degree_coordinates(lat_lng1: Coo
 
 
 if __name__ == '__main__':
-    with open('./verda.txt', 'r', encoding='utf8') as f:
-        places: typing.List[Place] = [l.strip().split('\t') for l in f.readlines()]
+    places: typing.List[Place] = [l.strip().split('\t') for l in open('./verda.txt', encoding='utf8')]
 
     coordinate_set: typing.Set[Coordinate] = set(
         [get_coordinates_from_place(l) for l in get_capitals_from_place_list(places)])

@@ -6,6 +6,8 @@ Coordinate = typing.Tuple[int, int]
 CoordinateList = typing.List[Coordinate]
 CoordinateSet = typing.Set[Coordinate]
 
+DIRECTIONS: typing.Tuple[Coordinate, Coordinate, Coordinate, Coordinate] = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
 
 class Labyrinth:
     def __init__(self, size):
@@ -31,8 +33,7 @@ class Labyrinth:
         return self._structure[y][x]
 
     def get_neighbors(self, c: Coordinate) -> CoordinateList:
-        dirs: CoordinateList = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-        candidates: CoordinateList = [add(c, d) for d in dirs]
+        candidates: CoordinateList = [add(c, d) for d in DIRECTIONS]
         return list(filter(self._is_legal_position, candidates))
 
     def get_open_neighbors(self, c: Coordinate) -> CoordinateList:

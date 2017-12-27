@@ -1,8 +1,7 @@
 from statistics import median
 from typing import Set, List
-from luke13.luke13 import read_file_to_string_array
 
-prisoner_order: List[int] = [int(line) for line in read_file_to_string_array('./prisoners.txt')]
+prisoner_order: List[int] = [int(line.strip()) for line in open('./prisoners.txt')]
 
 
 class LightBulb:
@@ -45,15 +44,3 @@ def lowest_number_of_visits_needed_before_quitting_with_given_order_and_given_le
 
 
 print(lowest_number_of_visits_needed_before_quitting_with_given_order_and_given_leader(prisoner_order, 1))
-
-print(
-    median(
-        sorted(
-            [(leader,
-              lowest_number_of_visits_needed_before_quitting_with_given_order_and_given_leader(prisoner_order,
-                                                                                               leader)) for
-             leader in range(2, 101)],
-            key=lambda x: x[1]
-        )
-    )
-)

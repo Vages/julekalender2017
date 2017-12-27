@@ -46,8 +46,7 @@ def word_has_matching_n_gram_string(riddle: str, word: str) -> typing.Tuple[bool
     return False, 0
 
 if __name__ == '__main__':
-    with open('wordlist.txt', 'r') as f:
-        the_word_list: WordList = [w.strip() for w in f.readlines()]
+    the_word_list: WordList = [w.strip() for w in open('wordlist.txt')]
 
     the_riddle: str = 'aeteesasrsssstaesersrrsse'
 

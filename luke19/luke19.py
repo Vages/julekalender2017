@@ -2,7 +2,6 @@ from functools import reduce
 from typing import List, Dict, Tuple, Set
 
 from luke02.luke02 import Coordinate, add
-from luke13.luke13 import read_file_to_string_array
 
 directions: Dict[str, Coordinate] = {
     'north': (0, 1),
@@ -49,9 +48,9 @@ class SnowyField:
 
         grid: List[List[str]] = []
 
-        for row in range(height+1):
+        for row in range(height + 1):
             row_values = []
-            for column in range(width+1):
+            for column in range(width + 1):
                 absolute_coordinate: Coordinate = add((column, row), (minimum_x_value, minimum_y_value))
                 if absolute_coordinate in touched_cells:
                     row_values.append(touched_char)
@@ -66,7 +65,8 @@ class SnowyField:
 if __name__ == '__main__':
     untouched_field: SnowyField = SnowyField()
 
-    instructions: List[Tuple[int, str]] = map(convert_line_to_instruction, read_file_to_string_array('./path.txt'))
+    instructions: List[Tuple[int, str]] = map(convert_line_to_instruction,
+                                              [line.strip() for line in open('./path.txt')])
     for steps, direction in instructions:
         for i in range(steps):
             untouched_field.take_one_step_in_direction(direction)

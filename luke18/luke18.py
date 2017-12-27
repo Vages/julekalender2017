@@ -3,7 +3,6 @@ from typing import Dict
 
 from luke01.luke01 import get_character_count_of_word, CharCount
 from luke02.luke02 import int_to_binary
-from luke13.luke13 import read_file_to_string_array
 
 
 def binary_enumerate(some_string: str) -> Dict[str, str]:
@@ -36,7 +35,7 @@ if __name__ == '__main__':
     encrypted_message: str = "111001010100000101100000001110111010010101001101101010110110000001000111110100000101001" \
                              "0001011101001100100100011010000110101111101010011100010110001100111110010"
 
-    national_hymn: [str] = ''.join(read_file_to_string_array('./ogudvorslands.txt'))
+    national_hymn: [str] = ''.join([line.strip() for line in open('./ogudvorslands.txt', encoding='utf8')])
     character_count_of_national_hymn: CharCount = get_character_count_of_word(national_hymn)
     icelandic_alphabet: str = 'AÁBDÐEÉFGHIÍJKLMNOÓPRSTUÚVXYÝÞÆÖ'
     enumerated_alphabet: Dict[str, str] = binary_enumerate(icelandic_alphabet)
